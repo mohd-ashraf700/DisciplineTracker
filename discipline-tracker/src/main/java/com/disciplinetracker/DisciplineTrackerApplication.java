@@ -15,11 +15,6 @@ public class DisciplineTrackerApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(DisciplineTrackerApplication.class, args);
-		System.out.println("hello mote");
-		User user = new User("Md Ashraf", "9876543210", "ashraf@example.com",LocalDate.of(2025 , 8 , 5), "password123");
-		user.setPhoneNumber("9352199719");
-		String number = user.getPhoneNumber();
-		System.out.println(number);
 	}
 
 }

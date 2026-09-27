@@ -1,34 +1,34 @@
 package com.disciplinetracker.model;
 
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
-    private static long nextUserId = 100000;
     private String userName;
     private String phoneNumber;
     private String emailId;
     private LocalDate dateOfBirth;
     private String password;
-    public User(String userName , String phoneNumber , String emailId , LocalDate dateOfBirth , String password){
-        this.userId = nextUserId;
-        nextUserId++;
-        this.userName = userName;
-        this.phoneNumber = phoneNumber;
-        this.emailId = emailId;
-        this.dateOfBirth = dateOfBirth;
-        this.password = password;
-    }
-    public long getUserId(){
+
+    public long getUserId() {
         return userId;
     }
-    public void setUserName(String userName){
-        this.userName = userName;
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
         return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPhoneNumber() {
@@ -36,22 +36,30 @@ public class User {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if(phoneNumber.matches("\\d{10}")){
-            this.phoneNumber = phoneNumber;
-        }
-        else{
-            throw new IllegalArgumentException("Phone number must be exactly 10 digits");
-        }
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getEmailId (){
+    public String getEmailId() {
         return emailId;
     }
-    public void setEmailId(String emailId){
+
+    public void setEmailId(String emailId) {
         this.emailId = emailId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }
