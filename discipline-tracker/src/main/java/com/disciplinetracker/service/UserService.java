@@ -37,4 +37,16 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
+    public User updateUser(Long id , User updatedUser){
+        User existingUser = userRepository.findById(id)
+                .orElse(null);
+
+        existingUser.setUserName(updatedUser.getUserName());
+        existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
+        existingUser.setEmailId(updatedUser.getEmailId());
+        existingUser.setDateOfBirth(updatedUser.getDateOfBirth());
+        existingUser.setPassword(updatedUser.getPassword());
+        return userRepository.save(existingUser);
+    }
 }
