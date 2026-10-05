@@ -3,6 +3,8 @@ package com.disciplinetracker.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -14,6 +16,8 @@ public class User {
     private String emailId;
     private LocalDate dateOfBirth;
     private String password;
+    @OneToMany(mappedBy = "user")
+    private List<Habit> habits;
 
     public long getUserId() {
         return userId;
@@ -61,5 +65,13 @@ public class User {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public List<Habit> getHabits() {
+        return habits;
+    }
+
+    public void setHabits(List<Habit> habits) {
+        this.habits = habits;
     }
 }
