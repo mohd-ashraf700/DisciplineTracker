@@ -1,4 +1,7 @@
 package com.disciplinetracker.repository;
 
-public interface HabitRepository {
+import com.disciplinetracker.model.Habit;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HabitRepository extends JpaRepository<Habit , Long> {
 }
