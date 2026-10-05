@@ -30,4 +30,11 @@ public class UserService {
         List<User> users = userRepository.findAll();
         return users;
     }
+
+    public void deleteUser(Long id) {
+        if (id == null) {
+            return;
+        }
+        userRepository.deleteById(id);
+    }
 }
