@@ -28,4 +28,11 @@ public class HabitCompletionController {
         List<HabitCompletion> response = habitCompletionService.getCompletionsByHabit(habitId);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/habit/{habitId}/streak")
+    public ResponseEntity<Integer> getCurrentStreak(
+            @PathVariable Long habitId){
+        int streak = habitCompletionService.getCurrentStreak(habitId);
+        return ResponseEntity.ok(streak);
+    }
 }
