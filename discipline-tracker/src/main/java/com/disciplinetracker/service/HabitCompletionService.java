@@ -7,6 +7,7 @@ import com.disciplinetracker.repository.HabitRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class HabitCompletionService {
@@ -26,5 +27,9 @@ public class HabitCompletionService {
         completion.setCompletionDate(LocalDate.now());
 
         return habitCompletionRepository.save(completion);
+    }
+
+    public List<HabitCompletion> getCompletionsByHabit(Long habitId){
+        return habitCompletionRepository.findByHabitHabitId(habitId);
     }
 }

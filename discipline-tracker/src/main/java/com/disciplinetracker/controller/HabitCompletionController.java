@@ -3,10 +3,9 @@ package com.disciplinetracker.controller;
 import com.disciplinetracker.model.HabitCompletion;
 import com.disciplinetracker.service.HabitCompletionService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/habit-completion")
@@ -22,5 +21,11 @@ public class HabitCompletionController {
         HabitCompletion habitCompletionResponse = habitCompletionService.createCompletion(habitId);
 
         return ResponseEntity.ok(habitCompletionResponse);
+    }
+
+    @GetMapping("habit/{habitId}")
+    public ResponseEntity<List<HabitCompletion>> getCompletionByHabit(Long habitId){
+        List<HabitCompletion> response = habitCompletionService.getCompletionsByHabit(habitId);
+        return ResponseEntity.ok(response);
     }
 }
