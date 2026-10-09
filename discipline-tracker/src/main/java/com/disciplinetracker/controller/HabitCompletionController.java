@@ -35,4 +35,10 @@ public class HabitCompletionController {
         int streak = habitCompletionService.getCurrentStreak(habitId);
         return ResponseEntity.ok(streak);
     }
+
+    @GetMapping("/habit/{habitId}/active-days")
+    public ResponseEntity<Integer> getTotalActiveDays(@PathVariable Long habitId){
+        int totalActiveDays = habitCompletionService.totalActiveDays(habitId);
+        return ResponseEntity.ok(totalActiveDays);
+    }
 }

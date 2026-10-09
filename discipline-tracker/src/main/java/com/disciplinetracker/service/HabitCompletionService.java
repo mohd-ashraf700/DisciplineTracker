@@ -64,4 +64,9 @@ public class HabitCompletionService {
         }
         return streak;
     }
+
+    public int totalActiveDays(Long habitId){
+        List<HabitCompletion> completions = getCompletionsByHabit(habitId);
+        return completions.size();
+    }
 }
