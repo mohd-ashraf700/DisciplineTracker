@@ -5,12 +5,21 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        columnNames = {"habit_id" , "completion_date"}
+                )
+        }
+)
 public class HabitCompletion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long completionId;
     @ManyToOne
+    @JoinColumn(name = "habit_id" , nullable = false)
     private Habit habit;
+    @Column(name = "completion_date" , nullable = false)
     private LocalDate completionDate;
 
     public Long getCompletionId() {

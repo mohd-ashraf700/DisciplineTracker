@@ -4,6 +4,7 @@ import com.disciplinetracker.model.Habit;
 import com.disciplinetracker.model.HabitCompletion;
 import com.disciplinetracker.repository.HabitCompletionRepository;
 import com.disciplinetracker.repository.HabitRepository;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -68,5 +69,37 @@ public class HabitCompletionService {
     public int totalActiveDays(Long habitId){
         List<HabitCompletion> completions = getCompletionsByHabit(habitId);
         return completions.size();
+    }
+
+    public int getLongestStreak(Long habitId){
+        List<HabitCompletion> completions = getCompletionsByHabit(habitId);
+
+        if(completions.isEmpty()){
+            return 0;
+        }
+
+        int longestStreak = 1;
+        int streak = 1;
+        for(int i = 1; i < completions.size(); i++){
+            LocalDate previous = completions.get(i - 1).getCompletionDate();
+            LocalDate current = completions.get(i).getCompletionDate();
+            long diff = ChronoUnit.DAYS.between(current , previous);
+            if(diff == 1){
+                streak++;
+            }else{
+                streak = 1;
+            }
+            longestStreak = Math.max(longestStreak , streak);
+        }
+        return longestStreak;
+    }
+
+    public boolean isCompleteToday(Long habitId){
+        LocalDate today = LocalDate.now();
+        habitRepository.findById(habitId)
+                .orElseThrow(() -> new RuntimeException("Habit not found"));
+        return habitCompletionRepository
+                .findByHabitHabitIdAndCompletionDate(habitId, today)
+                .isPresent();
     }
 }

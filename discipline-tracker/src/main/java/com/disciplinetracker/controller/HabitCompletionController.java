@@ -41,4 +41,16 @@ public class HabitCompletionController {
         int totalActiveDays = habitCompletionService.totalActiveDays(habitId);
         return ResponseEntity.ok(totalActiveDays);
     }
+
+    @GetMapping("/habit/{habitId}/longest-streak")
+    public ResponseEntity<Integer> getLongestStreak(@PathVariable Long habitId){
+        int streak = habitCompletionService.getLongestStreak(habitId);
+        return ResponseEntity.ok(streak);
+    }
+
+    @GetMapping("/habit/{habitId}/today")
+    public ResponseEntity<Boolean> isCompleteToday(@PathVariable Long habitId){
+        boolean isActive = habitCompletionService.isCompleteToday(habitId);
+        return ResponseEntity.ok(isActive);
+    }
 }
